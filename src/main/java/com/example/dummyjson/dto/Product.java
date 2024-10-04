@@ -1,13 +1,19 @@
 package com.example.dummyjson.dto;
 
-import javax.validation.Valid;
+import java.io.Serializable;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class Product {
+public class Product implements Serializable {
 
-    @NotNull
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@NotNull
     @Min(0L)
     @Max(999L)
     private Long id;

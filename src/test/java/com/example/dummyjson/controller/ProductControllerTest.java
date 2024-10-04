@@ -1,19 +1,19 @@
 package com.example.dummyjson.controller;
 
-import com.example.dummyjson.dto.Product;
-import com.example.dummyjson.service.ProductService;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import com.example.dummyjson.dto.Product;
+import com.example.dummyjson.service.ProductService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductControllerTest {

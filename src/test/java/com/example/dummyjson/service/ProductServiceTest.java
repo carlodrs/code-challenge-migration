@@ -1,7 +1,11 @@
 package com.example.dummyjson.service;
 
-import com.example.dummyjson.dto.Product;
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -9,11 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import com.example.dummyjson.dto.Product;
+import com.example.dummyjson.dto.wrapper.ProductList;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductServiceTest {
@@ -28,18 +29,24 @@ public class ProductServiceTest {
     public void testGetAllProducts() {
         Product product1 = new Product();
         product1.setId(1L);
-        product1.setTitle("Product 1");
+        product1.setTitle("Essence Mascara Lash Princess");
 
         Product product2 = new Product();
         product2.setId(2L);
-        product2.setTitle("Product 2");
-
-        Product[] products = {product1, product2};
-        when(restTemplate.getForObject("https://dummyjson.com/products", Product[].class)).thenReturn(products);
+        product2.setTitle("Eyeshadow Palette with Mirror");
+        	
+        List<Product> products = new ArrayList<Product>();
+        products.add(product1);
+        products.add(product2);
+        
+        ProductList productList = new ProductList();
+        productList.setProducts(products);
+        
+        when(restTemplate.getForObject("https://dummyjson.com/products", ProductList.class)).thenReturn(productList);
 
         List<Product> result = productService.getAllProducts();
         assertEquals(2, result.size());
-        assertEquals("Product 1", result.get(0).getTitle());
+        assertEquals("Essence Mascara Lash Princess", result.get(0).getTitle());
     }
 
     @Test
