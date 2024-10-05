@@ -1,15 +1,17 @@
 package com.example.dummyjson.dto;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
+/**
+ * DTO Product para recuperacao dos dados retornados pela inteface DummyJson
+*/
 public class Product {
 
     @NotNull
-    @Min(0L)
-    @Max(999L)
+    @Min(0)
+    @Max(999)
     private Long id;
 
     @NotNull

@@ -1,2 +1,32 @@
+spring:
+    config:
+        activate:
+            on-profile: local
+name: local
+environmentName: local
+url: "https://dummyjson.com/products"
+
 server:
   port: 8080
+---
+spring:
+    config:
+        activate:
+            on-profile: homolog
+name: homolog
+environmentName: homolog
+url: "https://homolog-dummyjson.com/products"
+
+server:
+  port: 8082
+---
+spring:
+    config:
+        activate:
+            on-profile: prod
+name: prod
+environmentName: prod
+url: "https://prod-dummyjson.com/products"
+
+server:
+  port: 8088

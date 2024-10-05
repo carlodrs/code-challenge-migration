@@ -1,30 +1,60 @@
 package com.example.dummyjson.service;
 
-import com.example.dummyjson.dto.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import com.example.dummyjson.dto.Product;
+import com.example.dummyjson.dto.wrapper.ProductList;
 
+
+/**
+ * 
+ * Classe de servico responsavel
+ * pelas transacoes e chamadas da 
+ * API dummyJson Products
+ * 
+ * @since 2025
+ * @serial 2.0
+ * */
 @Service
 public class ProductService {
 
-    private final String BASE_URL = "https://dummyjson.com/products";
-
     @Autowired
-    private RestTemplate restTemplate;
+	private WebClient.Builder webClientBuilder;
+    
+    /* URL dummyJson - product - see yaml file */
+	@Value("${url}")
+	private String baseUrl;
 
-    public List<Product> getAllProducts() {
-        Product[] products = restTemplate.getForObject(BASE_URL, Product[].class);
-        return Arrays.asList(products);
-    }
+	
+	/**
+	 * Metodo para listagem de produtos
+	 * @return ProductList
+	 * 
+	 * */
+    public ProductList getAllProducts() {
+    	 return webClientBuilder.build()
+    			 .get()
+    			 .uri(baseUrl)
+    			 .retrieve()
+    			 .bodyToMono(ProductList.class)
+    			 .block();	 
+     }
 
+    /**
+	 * Metodo para recuperacao de um produto especifico 
+	 * @param Long  Id do produto
+	 * @return Product
+	 * 
+	 * */
     public Product getProductById(Long id) {
-        String url = BASE_URL + "/" + id;
-        return restTemplate.getForObject(url, Product.class);
+    	return webClientBuilder.build()
+    			 .get()
+    			 .uri(baseUrl + "/" + id)
+    			 .retrieve()
+    			 .bodyToMono(Product.class)
+    			 .block();	 
     }
 }
