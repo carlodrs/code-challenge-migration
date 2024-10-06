@@ -20,15 +20,14 @@ import com.example.dummyjson.dto.wrapper.ProductListWrapper;
  * */
 @Service
 public class ProductService {
-
+    
+    @Value("${url}")
+	private String baseUrl;
+    
     @Autowired
 	private WebClient.Builder webClientBuilder;
-    
-    /* URL dummyJson - product - see yaml file */
-	@Value("${url}")
-	private String baseUrl;
 
-	
+
 	/**
 	 * Metodo para listagem de produtos
 	 * @return ProductList

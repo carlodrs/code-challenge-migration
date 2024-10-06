@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.dummyjson.dto.Product;
 import com.example.dummyjson.dto.wrapper.ProductListWrapper;
 import com.example.dummyjson.service.ProductService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 
 import jakarta.annotation.Nonnull;
 

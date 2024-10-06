@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @author CarlosRenatoDomingos
  * @since 2024
  */
-public class YAMLFileConfig {
+public class YamlFileConfig {
 
 	private String name;
     private String environmentName;

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
@@ -17,6 +18,7 @@ import com.example.dummyjson.dto.Product;
 import com.example.dummyjson.dto.wrapper.ProductListWrapper;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ProductServiceTest {
 
 	    @Autowired

@@ -30,3 +30,14 @@ url: "https://prod-dummyjson.com/products"
 
 server:
   port: 8088
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+name: test
+environmentName: test
+url: "https://dummyjson.com/products"
+
+server:
+  port: 8080

@@ -19,7 +19,7 @@ public class EnvironmentAppConfig implements CommandLineRunner {
 	Logger LOGGER = Logger.getLogger(EnvironmentAppConfig.class.getName());
 	
     @Autowired
-    private YAMLFileConfig config;
+    private YamlFileConfig config;
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(EnvironmentAppConfig.class);
