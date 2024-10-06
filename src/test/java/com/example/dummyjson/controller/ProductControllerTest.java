@@ -1,56 +1,57 @@
-//package com.example.dummyjson.controller;
-//
-//import com.example.dummyjson.dto.Product;
-//import com.example.dummyjson.service.ProductService;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.MockitoJUnitRunner;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//
-//import static org.junit.Assert.assertEquals;
-//import static org.mockito.Mockito.when;
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class ProductControllerTest {
-//
-//    @InjectMocks
-//    private ProductController productController;
-//
-//    @Mock
-//    private ProductService productService;
-//
-//    @Test
-//    public void testGetAllProducts() {
-//        Product product1 = new Product();
-//        product1.setId(1L);
-//        product1.setTitle("Product 1");
-//
-//        Product product2 = new Product();
-//        product2.setId(2L);
-//        product2.setTitle("Product 2");
-//
-//        List<Product> products = Arrays.asList(product1, product2);
-//        when(productService.getAllProducts()).thenReturn(products);
-//
-//        List<Product> result = productController.getAllProducts();
-//        assertEquals(2, result.size());
-//        assertEquals("Product 1", result.get(0).getTitle());
-//    }
-//
-//    @Test
-//    public void testGetProductById() {
-//        Product product = new Product();
-//        product.setId(1L);
-//        product.setTitle("Product 1");
-//
-//        when(productService.getProductById(1L)).thenReturn(product);
-//
-//        Product result = productController.getProductById(1L);
-//        assertEquals("Product 1", result.getTitle());
-//    }
-//}
+package com.example.dummyjson.controller;
+
+import static org.junit.Assert.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+
+import com.jayway.jsonpath.JsonPath;
+
+@SpringBootTest 
+@AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class ProductControllerTest {
+	
+	@Autowired
+	private MockMvc mockMvc;
+
+    @Test
+    @Order(1)
+    public void testGetAllProducts() throws Exception {
+    	MvcResult result = mockMvc.perform(get("/api/products")).andReturn();
+    	assertEquals(200, result.getResponse().getStatus());
+    }
+    
+    @Test
+    @Order(2)
+    public void testSpecificProduct() throws Exception {
+
+        Integer expectId = 1;
+    	String expectedTitle = "Essence Mascara Lash Princess";
+    	String expectedDescription = "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.";
+    	Double expectedPrice = 9.99;
+    	
+    	MvcResult mvcResult = mockMvc.perform(get("/api/products/1")
+    			.accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+    	
+    	String response = mvcResult.getResponse().getContentAsString();
+    
+    	assertEquals(expectId, JsonPath.parse(response).read("$.id"));
+    	assertEquals(expectedTitle, JsonPath.parse(response).read("$.title"));
+    	assertEquals(expectedDescription, JsonPath.parse(response).read("$.description"));
+    	assertEquals(expectedPrice, JsonPath.parse(response).read("$.price"));    	
+    }
+    
+    
+}

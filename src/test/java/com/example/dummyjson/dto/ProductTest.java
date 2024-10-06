@@ -1,31 +1,32 @@
-//package com.example.dummyjson.dto;
-//
-//import org.junit.Assert;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.junit.MockitoJUnitRunner;
-//
-//import javax.validation.constraints.NotNull;
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class ProductTest {
-//
-//    @Test
-//    public void testGetAndSetter(){
-//        Long expectId = 1L;
-//        String expectedTitle = "A dummy title";
-//        String expectedDescription = "A dummy description";
-//        Double expectedPrice = new Double("2.1");
-//
-//        Product product1 = new Product();
-//        product1.setId(1L);
-//        product1.setTitle("A dummy title");
-//        product1.setDescription("A dummy description");
-//        product1.setPrice(new Double("2.1"));
-//
-//        Assert.assertEquals(expectId, product1.getId());
-//        Assert.assertEquals(expectedTitle, product1.getTitle());
-//        Assert.assertEquals(expectedDescription, product1.getDescription());
-//        Assert.assertEquals(expectedPrice, product1.getPrice());
-//    }
-//}
+package com.example.dummyjson.dto;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+public class ProductTest {
+
+    @Test
+    public void testGetAndSetter(){
+
+
+        Long expectId = 1l;
+    	String expectedTitle = "Essence Mascara Lash Princess";
+    	String expectedDescription = "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.";
+    	Double expectedPrice = 9.99;
+    	
+    	
+        Product product1 = new Product();
+        product1.setId(1L);
+        product1.setTitle("Essence Mascara Lash Princess");
+        product1.setDescription("The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.");
+        product1.setPrice(9.99);
+
+        assertThat(expectId).isEqualTo(product1.getId());
+        assertThat(expectedTitle).isEqualTo(product1.getTitle());
+        assertThat(expectedDescription).isEqualTo(product1.getDescription());
+        assertThat(expectedPrice).isEqualTo(product1.getPrice());
+    }
+}
