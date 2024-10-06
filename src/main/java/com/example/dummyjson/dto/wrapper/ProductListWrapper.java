@@ -12,11 +12,11 @@ import com.example.dummyjson.dto.Product;
  * @since 2024
  * 
  * */
-public class ProductList {
+public class ProductListWrapper {
 
 	private List<Product> products;
 
-    public ProductList() {
+    public ProductListWrapper() {
     	products = new ArrayList<>();
     }
 

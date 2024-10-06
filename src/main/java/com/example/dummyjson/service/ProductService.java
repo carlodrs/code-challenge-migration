@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.example.dummyjson.dto.Product;
-import com.example.dummyjson.dto.wrapper.ProductList;
+import com.example.dummyjson.dto.wrapper.ProductListWrapper;
 
 
 /**
@@ -34,12 +34,12 @@ public class ProductService {
 	 * @return ProductList
 	 * 
 	 * */
-    public ProductList getAllProducts() {
+    public ProductListWrapper getAllProducts() {
     	 return webClientBuilder.build()
     			 .get()
     			 .uri(baseUrl)
     			 .retrieve()
-    			 .bodyToMono(ProductList.class)
+    			 .bodyToMono(ProductListWrapper.class)
     			 .block();	 
      }
 

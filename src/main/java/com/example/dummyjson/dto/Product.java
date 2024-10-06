@@ -20,9 +20,22 @@ public class Product {
     @NotNull
     private String description;
 
+    private String category;
+    
     @NotNull
     private Double price;
 
+    @NotNull
+    private Double discountPercentage;
+
+    @NotNull
+    private Double rating;
+    
+    private Integer stock;
+    
+    private String[] tags;
+    
+    
     // Getters and Setters
 
     public Long getId() {
@@ -56,4 +69,47 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+	public Double getDiscountPercentage() {
+		return discountPercentage;
+	}
+
+	public void setDiscountPercentage(Double discountPercentage) {
+		this.discountPercentage = discountPercentage;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public Integer getStock() {
+		return stock;
+	}
+
+	public void setStock(Integer stock) {
+		this.stock = stock;
+	}
+
+	public String[] getTags() {
+		return tags;
+	}
+
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+    
+    
+    
 }

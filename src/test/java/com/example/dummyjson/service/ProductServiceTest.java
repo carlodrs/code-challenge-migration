@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import com.example.dummyjson.dto.Product;
-import com.example.dummyjson.dto.wrapper.ProductList;
+import com.example.dummyjson.dto.wrapper.ProductListWrapper;
 
 @SpringBootTest
 public class ProductServiceTest {
@@ -55,7 +55,7 @@ public class ProductServiceTest {
 	            webClient.get()
 	              .uri(url + "wrongURL")
 	              .retrieve()
-	              .bodyToMono(ProductList.class)
+	              .bodyToMono(ProductListWrapper.class)
 	              .block();
 	        });
 
