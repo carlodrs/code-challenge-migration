@@ -1,56 +1,65 @@
-//package com.example.dummyjson.service;
-//
-//import com.example.dummyjson.dto.Product;
-//import org.junit.Before;
-//import org.junit.Test;
-//import org.junit.runner.RunWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.MockitoJUnitRunner;
-//import org.springframework.web.client.RestTemplate;
-//
-//import java.util.Arrays;
-//import java.util.List;
-//
-//import static org.junit.Assert.assertEquals;
-//import static org.mockito.Mockito.when;
-//
-//@RunWith(MockitoJUnitRunner.class)
-//public class ProductServiceTest {
-//
-//    @InjectMocks
-//    private ProductService productService;
-//
-//    @Mock
-//    private RestTemplate restTemplate;
-//
-//    @Test
-//    public void testGetAllProducts() {
-//        Product product1 = new Product();
-//        product1.setId(1L);
-//        product1.setTitle("Product 1");
-//
-//        Product product2 = new Product();
-//        product2.setId(2L);
-//        product2.setTitle("Product 2");
-//
-//        Product[] products = {product1, product2};
-//        when(restTemplate.getForObject("https://dummyjson.com/products", Product[].class)).thenReturn(products);
-//
-//        List<Product> result = productService.getAllProducts();
-//        assertEquals(2, result.size());
-//        assertEquals("Product 1", result.get(0).getTitle());
-//    }
-//
-//    @Test
-//    public void testGetProductById() {
-//        Product product = new Product();
-//        product.setId(1L);
-//        product.setTitle("Product 1");
-//
-//        when(restTemplate.getForObject("https://dummyjson.com/products/1", Product.class)).thenReturn(product);
-//
-//        Product result = productService.getProductById(1L);
-//        assertEquals("Product 1", result.getTitle());
-//    }
-//}
+package com.example.dummyjson.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+
+import com.example.dummyjson.dto.Product;
+import com.example.dummyjson.dto.wrapper.ProductList;
+
+@SpringBootTest
+public class ProductServiceTest {
+
+	    @Autowired
+	    private WebClient.Builder webClientBuilder;
+
+	    @Value("${url}")
+	    private String url;
+	    
+	    private WebClient webClient;
+	    
+	    @BeforeEach
+	    void init() {
+	    	webClient =  webClientBuilder.baseUrl(url).build();
+	    }
+	    
+	    @Test
+	    public void testProductPriceApiDummyJson() {
+	    
+	    	Integer productId = 1;
+	        Product product = webClient.get()
+	          .uri(url + "/" + productId)
+	          .retrieve()
+	          .bodyToMono(Product.class)
+	          .block();
+
+	        assertNotNull(product);
+	        assertEquals(1, product.getId());
+	        assertEquals(9.99, product.getPrice());
+	    }
+
+	    @Test
+	    public void testWebClientResponseException() {
+	    	
+	    
+	        WebClientResponseException exception = assertThrows(WebClientResponseException.class, () -> {
+	            webClient.get()
+	              .uri(url + "wrongURL")
+	              .retrieve()
+	              .bodyToMono(ProductList.class)
+	              .block();
+	        });
+
+	        assertEquals(HttpStatus.NOT_FOUND, exception.getStatusCode());
+	    }
+	    
+}
