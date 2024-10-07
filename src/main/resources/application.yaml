@@ -5,7 +5,17 @@ spring:
 name: local
 environmentName: local
 url: "https://dummyjson.com/products"
-
+management:
+  endpoints:
+    web:
+      base-path: "/"
+      path-mapping:
+        health: "health"
+      exposure:
+        include: "*"
+  endpoint:
+   health:
+    show-details: "always"
 server:
   port: 8080
 ---
