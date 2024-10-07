@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.dummyjson</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>dummyjson</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>dummyjson</name>
@@ -79,6 +79,11 @@
 				<plugin>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<docker>
+							<host>//./pipe/dockerDesktopLinuxEngine</host>
+						</docker>
+					</configuration>
 				</plugin>
 			</plugins>
 		 </pluginManagement>
