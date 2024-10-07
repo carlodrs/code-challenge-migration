@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +35,9 @@ public class ProductController {
     /**
      * Metodo utilizado para listar todos os produtos
      *@return {@link ProductListWrapper}
-     * @throws JSONException 
      */
     @GetMapping
-    public ResponseEntity<Map<String, List<Product>>> getAllProducts() throws JSONException {
+    public ResponseEntity<Map<String, List<Product>>> getAllProducts() {
     	ProductListWrapper wrapper = productService.getAllProducts();
     	List<Product> products = wrapper.getProducts();
     	Map<String, List<Product> > map = new  HashMap<>();
