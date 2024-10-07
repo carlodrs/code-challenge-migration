@@ -11,6 +11,10 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(WebClientResponseException.NotFound.class)
 	public ResponseEntity<Object> handle404Exception( WebClientResponseException.NotFound ex) {
+		return ResponseEntity.notFound().build();
+	}
+	
+	public ResponseEntity<Object> handle400Exception( WebClientResponseException.BadRequest ex) {
 		return ResponseEntity.badRequest().body(ex.getMessage());
 	}
 	
