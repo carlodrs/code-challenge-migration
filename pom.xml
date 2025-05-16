@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>com.example.dummyjson</groupId>
 	<artifactId>dummyjson</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>dummyjson</name>
 	<description>Dummyjson project for Spring Boot</description>
