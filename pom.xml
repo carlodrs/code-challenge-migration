@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.example.dummyjson</groupId>
 	<artifactId>dummyjson</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 	<name>dummyjson</name>
 	<description>Dummyjson project for Spring Boot</description>
@@ -82,6 +83,18 @@
 						<docker>
 							<host>//./pipe/dockerDesktopLinuxEngine</host>
 						</docker>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.2.0</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>com.example.dummyjson.DummyJsonClientApplication</mainClass>
+							</manifest>
+						</archive>
 					</configuration>
 				</plugin>
 			</plugins>
