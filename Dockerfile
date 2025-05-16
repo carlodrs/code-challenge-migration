@@ -6,6 +6,6 @@ RUN mvn -f ./pom.xml clean package
 
 FROM openjdk:17-slim
 WORKDIR /opt/app
-COPY --from=BUILDER ./target/*.jar /app.jar
+COPY --from=BUILDER target/*.jar ./app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "/app.jar"]
