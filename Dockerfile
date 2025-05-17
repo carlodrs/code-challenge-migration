@@ -8,4 +8,4 @@ FROM openjdk:17-slim
 WORKDIR /opt/app
 COPY --from=BUILDER /opt/app/target/*.jar ./app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["mvn", "spring-boot:run", ""]
